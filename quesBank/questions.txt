@@ -1,0 +1,15 @@
+1 - When the inheritance is private, the private methods in base class are __________ in the derived class (in C++).
+A) Inaccessible
+B) Accessible
+C) Protected
+D) Public
+2 - Which design patterns benefit from the multiple inheritances?
+A) Adapter and observer pattern
+B) Code pattern
+C) Glue pattern
+D) None of the mentioned
+3 - What is meant by multiple inheritance?
+A) Deriving a base class from derived class
+B) Deriving a derived class from base class
+C) Deriving a derived class from more than one base class
+D) None of the mentioned.

@@ -7,8 +7,13 @@ class Quiz{
     private:
         // This is the question filename.
         string QFILENAME = "quesBank/questions.txt";
-
+        string questions[20];
     public:
+        Quiz(){
+            for(int i=0; i<20; i++){
+                questions[i] = getQuestion(i+1);
+            }
+        }
         /*********************************
                 getByLineNumber()
         **********************************
@@ -64,21 +69,38 @@ class Quiz{
             **************************************
                 It will count lines as we read 
                 the lines in file.
-            **************************************/
+            *************************************/
             int countLine=0;
 
+            /**************************************
+                This portion of code will search
+                for  question  and  add  it  the 
+                question   variable   with   its 
+                options as well.
+            **************************************/
             while(getline(quesFile,line)){
-                if( ((int)line[0]-48) == quesNo){
+                // Check if the first character is a number
+                // and = to the qiven question number.
+                if( ((int)line[0]-48) == quesNo && line[1] == '.' ){
                     question = line;
-                    for(int i=1; i<=4;i++){
+                    for(int i=1; i<=5;i++){
                         question += "\n" + getByLineNumber(countLine+i);
                     }
+                    break;
+                }
+                else if( (int)line[0]-48==quesNo/10 && (int)line[1]-48 == quesNo%10){
+                    question = line;
+                    for(int i=1; i<=5;i++){
+                        question += "\n" + getByLineNumber(countLine+i);
+                    }
+                    break;
                 }
                 countLine++;
             }
+
+            // Closing file
             quesFile.close();
 
             return question;
         }
-
 };

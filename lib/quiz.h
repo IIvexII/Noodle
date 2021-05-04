@@ -81,20 +81,20 @@ class Quiz{
             while(getline(quesFile,line)){
                 // Check if the first character is a number
                 // and = to the qiven question number.
-                if( ((int)line[0]-48) == quesNo && line[1] == '.' ){
+                if( 
+                    (int)line[0]-48 == quesNo && line[1] == '.' ||
+
+                    // 12 -> 12/10 = 1 & 12%10 = 2
+                    // this logic will compare each digit.
+                    (int)line[0]-48==quesNo/10 && (int)line[1]-48 == quesNo%10
+                ){
                     question = line;
                     for(int i=1; i<=5;i++){
                         question += "\n" + getByLineNumber(countLine+i);
                     }
                     break;
                 }
-                else if( (int)line[0]-48==quesNo/10 && (int)line[1]-48 == quesNo%10){
-                    question = line;
-                    for(int i=1; i<=5;i++){
-                        question += "\n" + getByLineNumber(countLine+i);
-                    }
-                    break;
-                }
+
                 countLine++;
             }
 

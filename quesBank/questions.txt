@@ -1,15 +1,140 @@
-1 - When the inheritance is private, the private methods in base class are __________ in the derived class (in C++).
-A) Inaccessible
-B) Accessible
-C) Protected
-D) Public
-2 - Which design patterns benefit from the multiple inheritances?
-A) Adapter and observer pattern
-B) Code pattern
-C) Glue pattern
-D) None of the mentioned
-3 - What is meant by multiple inheritance?
-A) Deriving a base class from derived class
-B) Deriving a derived class from base class
-C) Deriving a derived class from more than one base class
-D) None of the mentioned.
+1. When the inheritance is private, the private methods in base class are __________ in the derived class (in C++).
+
+A. Inaccessible
+B. Accessible
+C. Protected
+D. Public
+
+2. Which design patterns benefit from the multiple inheritances?
+
+A. Adapter and observer pattern
+B. Code pattern
+C. Glue pattern
+D. None of the mentioned
+
+3. What is meant by multiple inheritance?
+
+A. Deriving a base class from derived class
+B. Deriving a derived class from base class
+C. Deriving a derived class from more than one base class
+D. None of the mentioned
+
+4. What will be the order of execution of base class constructors in the following method of inheritance.class a: public b, public c {...};
+
+A. b(); c(); a();
+B. c(); b(); a();
+C. a(); b(); c();
+D. b(); a(); c();
+
+5. Inheritance allow in C++ Program?
+
+A. Class Re-usability
+B. Creating a hierarchy of classes
+C. Extendibility
+D. All of the above
+
+6. Can we pass parameters to base class constructor though derived class or derived class constructor?
+
+A. Yes
+B. No
+C. May Be
+D. Can't Say
+
+7. What are the things are inherited from the base class?
+
+A. Constructor and its destructor
+B. Operator=() members
+C. Friends
+D. All of the above  
+
+8. Which of the following advantages we lose by using multiple inheritance?
+
+A. Dynamic binding
+B. Polymorphism
+C. Both Dynamic binding & Polymorphism
+D. None of the mentioned
+
+9. Which symbol is used to create multiple inheritance?
+
+A. Dot
+B. Comma
+C. Dollar
+D. None of the above
+
+10. ___________ inheritance may lead to duplication of inherited members from a "grandparent" base class.
+
+A. Multipath
+B. Multiple
+C. Multilevel
+D. Hierarchical
+
+11. C++ Inheritance relationship is?
+
+A. Association
+B. Is-A
+C. Has-A
+D. None of the above
+
+12. State whether the following statements about inheritance are True or False. i) A public member of a class can be accessed by its own objects using the dot operator. ii) While inheriting, the private members of the base class will never become the members of its derived class.
+
+A. True, False
+B. False, True
+C. True, True
+D. False, False
+
+13. In inheritance, order of execution of base class and derived class destructors are:
+
+A. Base to derived
+B. Derived to base
+C. Random order
+D. None of the above
+
+14. What is the difference between protected and private access specifiers in inheritance?
+
+A. Private member is not inheritable and not accessible in derived class.
+B. Protected member is inheritable and also accessible in derived class.
+C. Both are inheritable but private is accessible in the derived class.
+D. Both are inheritable but protected is not accessible in the derived class.
+
+15. Which value is placed in the base class?
+
+A. Derived values
+B. Default type values
+C. Both A & B
+D. None of the mentioned
+
+16. The friend functions and the member functions of a friend class can directly access the______________ data.
+
+A. Private and protected
+B. Private and public
+C. Protected and public
+D. Private, protected and public
+
+17. What will be the order of execution of base class constructors in the following method of inheritance. class a: public b, virtual public c {...};
+
+A. b(); c(); a();
+B. c(); b(); a();
+C. a(); b(); c();
+D. b(); a(); c();
+
+18. class X, class Y and class Z are derived from class BASE. This is ______ inheritance.
+
+A. Multiple
+B. Multilevel
+C. Hierarchical
+D. Single
+
+19. Reusability of the code can be achieved in CPP through ______ .
+
+A. Polymorphism
+B. Encapsulation
+C. Inheritance
+D. Both A and C
+
+20. Private members of the class are not inheritable.
+
+A. TRUE
+B. FALSE
+C. May Be
+D. Can't Say
+

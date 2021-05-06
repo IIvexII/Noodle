@@ -1,8 +1,8 @@
 #include "lib/quiz.h"
+#include "lib/student.h"
 
 int main(){
-    Quiz q1;
-    cout << q1.getQuestion(12) << endl;
+    Student st; 
 
     return 0;
 }

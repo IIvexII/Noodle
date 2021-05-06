@@ -5,35 +5,45 @@ using namespace std;
 #define FILENAME "resources/student.bin"
 
 class Student{
-  private:
+  public:
     string name;
     string address;
     int rollNo;
-  public:
+
     // Constructors
     Student();
     Student(string, int, string);
 
     // Methods
     void writeFile(Student);
-    void readFile();
+    void write();
+    void read();
     void input();
     void output();
-    void displayError(){}
+    void showTableHead();
+    void displayError();
 };
-// Definition
+/*********************
+      Definition
+*********************/
+// Default Constructor
 Student::Student(){
-  // Default Constructor
   name = "";
   address = "";
   rollNo = 0;
 }
+// Parameterized Constructor
 Student::Student(string n, int r, string a){
-  // Parameterized Constructor
   name = n;
   address = a;
   rollNo = r;
 }
+/****************************
+        writeFile()
+*****************************
+  This method is responsible
+  for writing student file.
+*****************************/
 void Student::writeFile(Student st){
   // Open File
   ofstream outFile(FILENAME, ios::app);
@@ -46,6 +56,19 @@ void Student::writeFile(Student st){
     displayError();
   }
 }
+/******************************
+            write()
+*******************************
+  This function uses other
+  functions to get input from
+  user and write it in file.
+******************************/
+void Student::write(){
+  Student st;
+
+  st.input();
+  writeFile(st);
+}
 /****************************
           readFile()
 *****************************
@@ -53,15 +76,15 @@ void Student::writeFile(Student st){
   to write student object
   to the file.
 ****************************/
-void Student::readFile(){
+void Student::read(){
   Student st;
   // Open File
   ifstream inFile(FILENAME, ios::in);
 
   if(inFile.is_open()){
+    showTableHead();
     // Writing to file
-    while(inFile){
-      inFile.read(reinterpret_cast<char*>(&st), sizeof(st));
+    while(inFile.read(reinterpret_cast<char*>(&st), sizeof(st))){
       st.output();
     }
   }
@@ -69,17 +92,49 @@ void Student::readFile(){
     displayError();
   }
 }
+/****************************
+          input()
+*****************************
+  It takes input from user.
+****************************/
 void Student::input(){
-  Student st;
+  // For the weird behaviour of getline()
+  cin.clear();
+  cin.sync();
 
-  cout << "Name: "; cin.getline(st.name);
-  cin.ignore();
-  cout << "Roll Number: "; cin >> st.rollNo;
-  cout << "Name: "; cin.getline(st.name);
-  cin.ignore();
+  cout << "Name: "; getline(cin, name);
+  cout << "Roll Number: "; cin >> rollNo;
+
+  // For the weird behaviour of getline()
+  cin.clear();
+  cin.sync();
+
+  cout << "Address: "; getline(cin, address);
+
+  // For the weird behaviour of getline()
+  cin.clear();
+  cin.sync();
 }
+/****************************
+          output()
+*****************************
+  Show output to the user.
+****************************/
 void Student::output(){
-  cout << name << "\t";
-  cout << rollNo << "\t\t";
+  cout << name << "\t\t";
+  cout << rollNo << "\t";
   cout << address << endl;
+}
+void Student::showTableHead(){
+  cout << "Name\t\t" << "Roll Number\t" << "Address" << endl;
+  // cout << "---------------------------------------" << endl;
+}
+
+/****************************
+        displayError()
+*****************************
+      It display error.
+****************************/
+void Student::displayError(){
+  cout << "Error: Unable to open file." << endl;
 }

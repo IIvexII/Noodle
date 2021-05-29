@@ -1,43 +1,65 @@
 #include <iostream>
+#include <cstring>
+#include <conio.h>
 #include <fstream>
-#include "input.h"
+// #include "input.h"
 using namespace std;
 
 #define FILENAME "resources/student.bin"
 
 class Student{
-  public:
-    string name;
-    string address;
+  protected:
+    char *name = new char[50];
+    char *address = new char[50];
+    char *password = new char[50];
     int rollNo;
-
+    int marks;
+    int percentage;
+  public:
     // Constructors
     Student();
-    Student(string, int, string);
+    Student(char*, int, char*, char*);
 
     // Methods
+    // Write to file
     void writeFile(Student);
+    // Get input and store in file
     void write();
+    // read from file
     void read();
+    // Take input from user
     void input();
+    // display student info
     void output();
+    // table header.
     void showTableHead();
+    // display error
     void displayError();
+    // Password input
+    void passwdInput();
+
+    // Destructor
+    ~Student();
 };
 /*********************
       Definition
 *********************/
 // Default Constructor
 Student::Student(){
-  name = "";
-  address = "";
+  strcpy(name, "");
+  strcpy(address, "");
   rollNo = 0;
+  marks = -1;
+  percentage = 0;
 }
 // Parameterized Constructor
-Student::Student(string n, int r, string a){
-  name = n;
-  address = a;
+Student::Student(char *n, int r, char *a, char *p){
+  strcpy(name, n);
+  strcpy(address, a);
+  strcpy(password, p);
   rollNo = r;
+  marks=-1;
+  percentage = 0;
 }
 /****************************
         writeFile()
@@ -102,22 +124,15 @@ void Student::read(){
   It takes input from user.
 ****************************/
 void Student::input(){
-  // For the weird behaviour of getline()
-  cin.clear();
-  cin.sync();
-
-  cout << "Name: "; getline(cin, name);
+  cout << "Name: "; cin.getline(name, 50);
   cout << "Roll Number: "; cin >> rollNo;
-
+  
   // For the weird behaviour of getline()
   cin.clear();
-  cin.sync();
+  cin.ignore(124,'\n');
 
-  cout << "Address: "; getline(cin, address);
-
-  // For the weird behaviour of getline()
-  cin.clear();
-  cin.sync();
+  cout << "Address: "; cin.getline(address, 50);
+  cout << "Password: "; passwdInput();
 }
 /****************************
           output()
@@ -126,12 +141,14 @@ void Student::input(){
 ****************************/
 void Student::output(){
   cout << name << "\t\t";
-  cout << rollNo << "\t";
+  cout << rollNo << "\t\t";
+  cout << marks << "\t";
+  cout << percentage << "%\t\t";
   cout << address << endl;
 }
 void Student::showTableHead(){
-  cout << "Name\t\t" << "Roll Number\t" << "Address" << endl;
-  cout << "---------------------------------------" << endl;
+  cout << "Name\t\t\t" << "Roll Number\t" << "Marks\t" << "Percentage\t" << "Address" << endl;
+  cout << "------------------------------------------------------------------------------------" << endl;
 }
 
 /****************************
@@ -141,4 +158,31 @@ void Student::showTableHead(){
 ****************************/
 void Student::displayError(){
   cout << "Error: Unable to open file." << endl;
+}
+void Student::passwdInput(){
+  int index=0;
+  char character;
+
+  while(character!='\r' && index<50){
+    character = getch();
+    if(character!='\r'){
+        if(character!='\b' && character!='\t'){
+            cout << "*";
+            password[index] = character;
+            index++;
+        }
+        else if(index!=0 && character!='\t'){
+            index--;
+            password[index]= '\0';
+            cout << '\b' << " " << '\b';
+        }
+    }
+  }
+  password[index] = '\0';
+  cout << endl;
+}
+Student::~Student(){
+  delete[] name;
+  delete[] address;
+  delete[] password;
 }

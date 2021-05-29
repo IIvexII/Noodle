@@ -3,10 +3,12 @@
 
 
 int main(){
-    Student st;
+    Student *st = new Student;
 
-    st.write();
+    st->write();
 
-    st.read();
+    st->read();
+
+    delete st;
     return 0;
 }

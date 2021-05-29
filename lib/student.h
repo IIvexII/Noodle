@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include "input.h"
 using namespace std;
 
 #define FILENAME "resources/student.bin"
@@ -51,6 +52,7 @@ void Student::writeFile(Student st){
   if(outFile.is_open()){
     // Writing to file
     outFile.write(reinterpret_cast<char*>(&st), sizeof(st));
+    outFile.close();
   }
   else{
     displayError();
@@ -87,6 +89,8 @@ void Student::read(){
     while(inFile.read(reinterpret_cast<char*>(&st), sizeof(st))){
       st.output();
     }
+    // Closing File
+    inFile.close();
   }
   else{
     displayError();
@@ -127,7 +131,7 @@ void Student::output(){
 }
 void Student::showTableHead(){
   cout << "Name\t\t" << "Roll Number\t" << "Address" << endl;
-  // cout << "---------------------------------------" << endl;
+  cout << "---------------------------------------" << endl;
 }
 
 /****************************

@@ -1,13 +1,12 @@
 #include "lib/quiz.h"
 #include "lib/student.h"
 
-
 int main(){
-    Student *st = new Student;
+    StudentManagement *st = new StudentManagement;
 
-    st->write();
-
-    st->read();
+    st->input();
+    st->writeFile();
+    st->readFile();
 
     delete st;
     return 0;

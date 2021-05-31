@@ -15,9 +15,17 @@ class StudentManagement{
   private:
     Student student;
   public:
+    // Take input from user
     void input();
+
+    // Write student data to file
     void writeFile();
+
+    // Read student data from file
+    // print in the form of table
     void readFile();
+
+    // print student data 
     void output(Student);
 };
 

@@ -1,7 +1,4 @@
-#include <fstream>
-#include <iostream>
-#include <string>
-using namespace std;
+#include "header.h"
 
 class Quiz{
     private:

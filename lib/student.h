@@ -1,6 +1,4 @@
-#include <iostream>
-#include <fstream> 
-#include <conio.h>
+#include "header.h"
 #include "customInput.h"
 
 #define FILENAME "resources/student.bin"

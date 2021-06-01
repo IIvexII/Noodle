@@ -1,4 +1,4 @@
-#include <conio.h>
+#include "header.h"
 #include "customInput.h"
 
 #define FILENAME "resources/teacher.bin"

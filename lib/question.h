@@ -1,8 +1,4 @@
-#include <iostream>
-#include <cstring>
-#include <fstream>
-
-using namespace std;
+#include "header.h"
 
 #define FILENAME "quesBank/questions.bin"
 

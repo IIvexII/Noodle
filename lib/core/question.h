@@ -1,5 +1,7 @@
 #include "header.h"
 
+#pragma once
+
 #define FILENAME "quesBank/questions.bin"
 
 class Question{
@@ -16,7 +18,7 @@ class QuestionHandler{
 
   public:
     Question question;
-    void input(Question&);
+    void input();
     void display(Question);
     void writeFile();
     void readFile();
@@ -24,9 +26,10 @@ class QuestionHandler{
     Question searchQuestion(char*, int);
     bool askQuestion(char*, int);
     void updateQuestion();
+    void displayError();
 
 };
-void QuestionHandler::input(Question& question){
+void QuestionHandler::input(){
   cin.clear();
   cin.ignore(124, '\n');
   
@@ -61,6 +64,9 @@ void QuestionHandler::writeFile(){
     outFile.write((char*)&question, sizeof(question));
     outFile.close();
   }
+  else{
+    displayError();
+  }
 }
 /***********************
         readFile()
@@ -75,6 +81,9 @@ void QuestionHandler::readFile(){
       display(ques);
     }
     inFile.close();
+  }
+  else{
+    displayError();
   }
 }
 int QuestionHandler::countBySubject(char* subjectName){
@@ -141,7 +150,7 @@ bool QuestionHandler::askQuestion(char* subject, int questionNo){
 void QuestionHandler::updateQuestion(){
   Question ques, tmp;
   char subjectName[10]; 
-  int questionNo, count=1, choice;
+  int questionNo, count=1, choice, pos;
   
   cout << "Enter Subject: "; cin.getline(subjectName, 10);
   cout << "Enter Question Number: "; cin >> questionNo;
@@ -151,9 +160,11 @@ void QuestionHandler::updateQuestion(){
   file.seekg(0);
   
   while(file.read((char*)&ques, sizeof(ques))){
-    if(strcpy(subjectName, ques.subject)){
+    pos = file.tellg();
+    if(strcmp(subjectName, ques.subject)==0){
       if(count == questionNo){
         display(ques);
+        break;
       }
       count++;
     }
@@ -192,13 +203,19 @@ void QuestionHandler::updateQuestion(){
       
       cout << "Answer: "; cin >> ques.answer;
       break;
-    case 4:
-      input(tmp);
-      break;
+    // case 4:
+    //   input(tmp);
+    //   break;
   }
   
-  file.seekp(-sizeof(ques), ios::cur);
-  file.write((char*)&tmp, sizeof(tmp));
+  file.seekp(pos-sizeof(tmp));
+  file.write((char*)&tmp, sizeof(Student));
 
   file.close();
 }
+void QuestionHandler::displayError(){ 
+  cout << "Unable to open file..." << endl; 
+}
+
+
+#undef FILENAME 

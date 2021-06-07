@@ -1,14 +1,11 @@
-#include "lib/question.h"
+#include "lib/registration.h"
+#include "lib/core/question.h"
 
 int main(){
     QuestionHandler question;
 
-    // question.input(question.question);
-    // question.writeFile();
-
     question.updateQuestion();
-
     question.readFile();
-
+    
     return 0;
 }

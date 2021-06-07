@@ -1,6 +1,8 @@
 #include "header.h"
 #include "customInput.h"
 
+#pragma once
+
 #define FILENAME "resources/teacher.bin"
 
 struct Teacher{
@@ -60,3 +62,5 @@ void TeacherManagement::output(Teacher tch){
   cout << tch.empID << "\t\t";
   cout << tch.password << endl;
 }
+
+#undef FILENAME 

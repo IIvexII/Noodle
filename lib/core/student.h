@@ -1,13 +1,16 @@
 #include "header.h"
 #include "customInput.h"
 
+#pragma once
+
 #define FILENAME "resources/student.bin"
 
-struct Student{
-  char name[50];
-  int rollNo;
-  char password[100]; 
-  double marks;
+class Student{
+  public:
+    char name[50];
+    int rollNo;
+    char password[100]; 
+    double marks;
 };
 class StudentManagement{
   private:
@@ -25,6 +28,9 @@ class StudentManagement{
 
     // print student data 
     void output(Student);
+
+    // Set Marks
+    void setMarks(double);
 };
 
 void StudentManagement::input(){
@@ -35,7 +41,6 @@ void StudentManagement::input(){
   cin.clear();
   cin.ignore(124,'\n');
 
-  cout << "Marks: "; cin >> student.marks;
   cout << "Password: "; passwdInput(student.password);
 }
 void StudentManagement::writeFile(){
@@ -63,3 +68,8 @@ void StudentManagement::output(Student st){
   cout << st.marks << "\t\t";
   cout << st.password << endl;
 }
+void StudentManagement::setMarks(double marks){
+  student.marks = marks;
+}
+
+#undef FILENAME 

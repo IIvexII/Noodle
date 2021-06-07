@@ -1,5 +1,7 @@
 #include "header.h"
 
+#pragma once
+
 class Quiz{
     private:
         // This is the question filename.

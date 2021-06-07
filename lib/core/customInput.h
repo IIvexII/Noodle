@@ -1,3 +1,5 @@
+#pragma once 
+
 void passwdInput(char *password){
   int index=0; 
   char character;

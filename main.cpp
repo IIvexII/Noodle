@@ -1,11 +1,10 @@
-#include "lib/registration.h"
-#include "lib/core/question.h"
+#include "lib/core/student.h"
 
 int main(){
-    QuestionHandler question;
+    StudentManagement student;
 
-    question.updateQuestion();
-    question.readFile();
+    // student.newRegistration();
+    student.listAllStudents();
     
     return 0;
 }

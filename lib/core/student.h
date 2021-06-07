@@ -10,12 +10,12 @@ class Student{
     char name[50];
     int rollNo;
     char password[100]; 
-    double marks;
+    double marks=-1;
 };
 class StudentManagement{
   private:
     Student student;
-  public:
+
     // Take input from user
     void input();
 
@@ -28,11 +28,19 @@ class StudentManagement{
 
     // print student data 
     void output(Student);
-
+  public:
+    void newRegistration();
     // Set Marks
     void setMarks(double);
 };
 
+/***********************
+    newRegistration()
+************************/
+void StudentManagement::newRegistration(){
+  input();
+  writeFile();
+}
 void StudentManagement::input(){
   cout << "Name: "; cin.getline(student.name, 50);
   cout << "Roll Number: "; cin >> student.rollNo;
@@ -63,10 +71,15 @@ void StudentManagement::readFile(){
   }
 }
 void StudentManagement::output(Student st){
-  cout << st.name << "\t\t";
-  cout << st.rollNo << "\t\t";
-  cout << st.marks << "\t\t";
-  cout << st.password << endl;
+  cout << "|" << setw(30) << left << st.name << right << "|";
+  cout << setw(5) << right << st.rollNo << setw(5) << "|";
+  cout << setw(20) << right;
+  if(st.marks==-1)
+    cout << "NULL";
+  else
+    cout << st.marks;
+  
+  cout << setw(5) << "|" << endl;
 }
 void StudentManagement::setMarks(double marks){
   student.marks = marks;

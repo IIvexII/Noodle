@@ -35,7 +35,7 @@ class StudentManagement{
     void newRegistration();
     void listAll();
     void rusticate();
-    void updateMarks();
+    void updateMarks(int, int);
 };
 // Public
 /***********************
@@ -94,20 +94,26 @@ void StudentManagement::rusticate(){
     cout <<"Unable to delete.";
   cout << endl;
 }
-void StudentManagement::updateMarks(){
+void StudentManagement::updateMarks(int rn, int mk){
   fstream file(FILENAME, ios::binary | ios::in | ios::out);
-  int pos, rn;
-
-  cout << "Enter Roll Number: "; cin >> rn;
+  int pos;
+  bool isSucessful=0;
+  
   while(file.read((char*)&student, sizeof(student))){
     pos = file.tellg();
     if(student.rollNo == rn){
-      cout << "Enter Marks: "; cin >> student.marks;     
+      student.marks = mk;     
+      isSucessful=1;
       break; 
     }
   }
   file.seekp(pos-sizeof(student));
   file.write((char*)&student, sizeof(Student));
+
+  if(isSucessful)
+    cout << "Marks updated!" << endl;
+  else
+    cout << "Failed to update marks." << endl;
 
   file.close();
 }

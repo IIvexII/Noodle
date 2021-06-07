@@ -6,6 +6,6 @@ int main(){
     // student.newRegistration();
     student.listAll();
     // student.rusticate();
-    student.updateMarks();
+    student.updateMarks(22, 99);
     return 0;
 }

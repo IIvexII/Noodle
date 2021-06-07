@@ -1,11 +1,13 @@
+#include "lib/core/teacher.h"
 #include "lib/core/student.h"
 
 int main(){
+    TeacherManagement teacher;
     StudentManagement student;
-
-    // student.newRegistration();
     student.listAll();
-    // student.rusticate();
-    student.updateMarks(22, 99);
+    // teacher.newRegistration();
+    teacher.listAll();
+    // teacher.fire();
+    student.updatePasswd(22);
     return 0;
 }

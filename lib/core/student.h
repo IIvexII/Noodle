@@ -36,6 +36,7 @@ class StudentManagement{
     void listAll();
     void rusticate();
     void updateMarks(int, int);
+    void updatePasswd(int);
 };
 // Public
 /***********************
@@ -114,6 +115,31 @@ void StudentManagement::updateMarks(int rn, int mk){
     cout << "Marks updated!" << endl;
   else
     cout << "Failed to update marks." << endl;
+
+  file.close();
+}
+void StudentManagement::updatePasswd(int rn){
+  fstream file(FILENAME, ios::binary | ios::in | ios::out);
+  int pos;
+  bool isSucessful=0;
+  
+  while(file.read((char*)&student, sizeof(student))){
+    pos = file.tellg();
+    if(student.rollNo == rn){
+      cout << "Old Password: " << student.password << endl;
+      cout << "New Password: ";passwdInput(student.password);
+           
+      isSucessful=1;
+      break; 
+    }
+  }
+  file.seekp(pos-sizeof(student));
+  file.write((char*)&student, sizeof(student));
+
+  if(isSucessful)
+    cout << "Password Updated!" << endl;
+  else
+    cout << "Failed to update password." << endl;
 
   file.close();
 }

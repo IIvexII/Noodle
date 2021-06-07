@@ -4,7 +4,8 @@ int main(){
     StudentManagement student;
 
     // student.newRegistration();
-    student.listAllStudents();
-    
+    student.listAll();
+    // student.rusticate();
+    student.updateMarks();
     return 0;
 }

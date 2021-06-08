@@ -1,13 +1,9 @@
-#include "lib/core/teacher.h"
-#include "lib/core/student.h"
-
+#include "lib/noodle.h"
+#include "lib/core/admin.h"
 int main(){
-    TeacherManagement teacher;
-    StudentManagement student;
-    student.listAll();
-    // teacher.newRegistration();
-    teacher.listAll();
-    // teacher.fire();
-    student.updatePasswd(22);
+    // Noodle noodle;
+
+    // noodle.menuHandler();
+    Admin admin;
     return 0;
 }

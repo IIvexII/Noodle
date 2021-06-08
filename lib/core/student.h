@@ -14,7 +14,7 @@ class Student{
 };
 class StudentManagement{
   private:
-    Student student;
+    Student student, tmpStudent;
 
     // Take input from user
     void input();
@@ -37,6 +37,9 @@ class StudentManagement{
     void rusticate();
     void updateMarks(int, int);
     void updatePasswd(int);
+    bool login();
+    void mainMenu();
+    void menuHandler();
 };
 // Public
 /***********************
@@ -143,7 +146,28 @@ void StudentManagement::updatePasswd(int rn){
 
   file.close();
 }
+bool StudentManagement::login(){
+  int rn;
+  char password[100];
 
+  cin.clear();
+  cin.ignore(124,'\n');
+  cout << "Enter Roll Number: "; cin >> rn;
+  cout << "Password: "; passwdInput(password);
+
+  ifstream inFile(FILENAME);
+
+  while(inFile.read((char*)&tmpStudent,sizeof(Student))){
+    if(rn == tmpStudent.rollNo){
+      if(!strcmp(password, tmpStudent.password)){
+        return 1;
+      }
+    }
+  }
+
+  inFile.close();
+  return 0;
+}
 // Private
 void StudentManagement::input(){
   // For the weird behaviour of getline()

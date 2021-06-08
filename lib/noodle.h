@@ -8,6 +8,7 @@ class Noodle{
     void loginMenu();
     void menuHandler();
     void adminPanel();
+    void studentPanel();
   private:
     TeacherManagement teacher;
     StudentManagement student;
@@ -15,6 +16,27 @@ class Noodle{
     char choice;
 
 };
+
+void Noodle::menuHandler(){
+  loginMenu();
+  switch(choice){
+    case '1':
+      if(student.login()){
+        cout << "Login Sucessful!" << endl;
+      }
+      break;
+    case '3':
+      if(admin.login()){
+        adminPanel();
+        menuHandler();
+      }else{
+        getch();
+        menuHandler();
+      }
+      break;
+  }
+}
+
 void Noodle::banner(){
   system("cls");
   cout << "******************************************" << endl;
@@ -34,20 +56,10 @@ void Noodle::loginMenu(){
   } while(choice!='1' && choice!='2' && choice!='3' && choice!='0');
 }
 
-void Noodle::menuHandler(){
-  loginMenu();
-  switch(choice){
-    case '3':
-      if(admin.login()){
-        adminPanel();
-      }else{
-        getch();
-        menuHandler();
-      }
-      break;
-  }
-}
-
 void Noodle::adminPanel(){
   admin.menuHandler();
+}
+
+void Noodle::studentPanel(){
+  
 }

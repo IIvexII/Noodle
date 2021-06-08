@@ -90,9 +90,9 @@ void StudentManagement::rusticate(){
   rename(tempFilename, FILENAME);
 
   if(isDeleted)
-    cout << "Deleted sucessfuly!";
+    cout << "Rusticated sucessfuly!";
   else
-    cout <<"Unable to delete.";
+    cout <<"Unable to rusticate.";
   cout << endl;
 }
 void StudentManagement::updateMarks(int rn, int mk){
@@ -146,6 +146,10 @@ void StudentManagement::updatePasswd(int rn){
 
 // Private
 void StudentManagement::input(){
+  // For the weird behaviour of getline()
+  cin.clear();
+  cin.ignore(124,'\n');
+  
   cout << "Name: "; cin.getline(student.name, 50);
   cout << "Roll Number: "; cin >> student.rollNo;
 

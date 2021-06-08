@@ -1,9 +1,10 @@
 #include "lib/noodle.h"
 #include "lib/core/admin.h"
 int main(){
-    // Noodle noodle;
+    Noodle noodle;
 
-    // noodle.menuHandler();
-    Admin admin;
+    noodle.menuHandler();
+    // Admin admin;
+    // admin.menuHandler();
     return 0;
 }

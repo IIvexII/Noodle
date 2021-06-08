@@ -115,6 +115,8 @@ void TeacherManagement::updatePasswd(int id){
 }
 
 void TeacherManagement::input(){
+  cin.clear();
+  cin.ignore(124, '\n');
   cout << "Name: "; cin.getline(teacher.name, 50);
   cout << "Emplyee ID: "; cin >> teacher.empID;
 

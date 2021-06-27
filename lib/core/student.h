@@ -1,5 +1,6 @@
 #include "header.h"
 #include "customInput.h"
+#include "question.h"
 
 #pragma once
 
@@ -15,6 +16,9 @@ class Student{
 class StudentManagement{
   private:
     Student student, tmpStudent;
+    QuestionHandler question;
+    char choice;
+    int marks;
 
     // Take input from user
     void input();
@@ -32,6 +36,9 @@ class StudentManagement{
     // set marks
     void setMarks(double);
   public:
+    void banner();
+    void header();
+    void footer();
     void newRegistration();
     void listAll();
     void rusticate();
@@ -41,6 +48,12 @@ class StudentManagement{
     void mainMenu();
     void menuHandler();
 };
+void StudentManagement::banner(){
+  system("cls");
+  cout << "***********************************" << endl;
+  cout << "          Student Panel" << endl;
+  cout << "***********************************" << endl;
+}
 // Public
 /***********************
     newRegistration()
@@ -53,15 +66,9 @@ void StudentManagement::newRegistration(){
         listAll()
 ************************/
 void StudentManagement::listAll(){
-  cout << " _________________________________________________________________" << endl;
-  cout << "|" << setw(30) << left << "Name"
-              << setw(10) << "Roll Number"  
-              << setw(20) << right << "Marks" 
-              << setw(5) << right << "|" << endl;
-  cout << "|_________________________________________________________________|" << endl;
+  header();
   readFile();
-  cout << "|_________________________________________________________________|" << endl;
-
+  footer();
 }
 /**********************
       rusticate()
@@ -152,6 +159,9 @@ bool StudentManagement::login(){
 
   cin.clear();
   cin.ignore(124,'\n');
+
+  banner();
+
   cout << "Enter Roll Number: "; cin >> rn;
   cout << "Password: "; passwdInput(password);
 
@@ -160,13 +170,61 @@ bool StudentManagement::login(){
   while(inFile.read((char*)&tmpStudent,sizeof(Student))){
     if(rn == tmpStudent.rollNo){
       if(!strcmp(password, tmpStudent.password)){
+        cout << "Logged in as " << tmpStudent.name << "...." << endl;
         return 1;
+      }else{
+        cout << "Username or Password is wrong." << endl;
       }
     }
   }
 
   inFile.close();
   return 0;
+}
+void StudentManagement::mainMenu(){
+  banner();
+  cout << "1. Solve Quiz" << endl;
+  cout << "2. Change Password" << endl;
+  cout << "3. Display Your Information" << endl;
+  cout << "4. List all the Quiz Results" << endl;
+  cout << "0. Logout" << endl;
+
+  do{
+    choice = getch();
+  }while(choice!='1' && choice!='2' && choice!='3' && choice!='4' && choice!='0');
+}
+void StudentManagement::menuHandler(){
+  mainMenu();
+  switch(choice){
+    case '1':
+      banner();
+      marks = question.quiz()*10;
+      updateMarks(tmpStudent.rollNo, marks);
+      tmpStudent.marks = marks;
+      getch();
+      menuHandler();
+      break;
+    case '2':
+      banner();
+      updatePasswd(tmpStudent.rollNo);
+      getch();
+      menuHandler();
+      break;
+    case '3':
+      banner();
+      header();
+      output(tmpStudent);
+      footer();
+      getch();
+      menuHandler();
+      break;
+    case '4':
+      banner();
+      listAll();
+      getch();
+      menuHandler();
+      break;
+  }
 }
 // Private
 void StudentManagement::input(){
@@ -199,8 +257,9 @@ void StudentManagement::readFile(){
     while(inFile.read((char*)&st, sizeof(st))){
       output(st);
     }
-    inFile.close();
   }
+  inFile.close();
+  
 }
 void StudentManagement::output(Student st){
   cout << "|" << setw(30) << left << st.name << right << "|";
@@ -215,6 +274,17 @@ void StudentManagement::output(Student st){
 }
 void StudentManagement::setMarks(double marks){
   student.marks = marks;
+}
+void StudentManagement::header(){
+  cout << " _________________________________________________________________" << endl;
+  cout << "|" << setw(30) << left << "Name"
+              << setw(10) << "Roll Number"  
+              << setw(20) << right << "Marks" 
+              << setw(5) << right << "|" << endl;
+  cout << "|_________________________________________________________________|" << endl;
+}
+void StudentManagement::footer(){
+  cout << "|_________________________________________________________________|" << endl;
 }
 
 #undef FILENAME 

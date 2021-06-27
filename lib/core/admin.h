@@ -128,6 +128,10 @@ void Admin::menuHandler(){
 bool Admin::login(){
   char username[20], password[100];
 
+  cin.clear();
+  cin.ignore(124, '\n');
+
+  banner();
   cout << "Enter Username: "; cin.getline(username, 20);
   cout << "Enter Password: "; passwdInput(password);
 

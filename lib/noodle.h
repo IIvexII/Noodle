@@ -1,3 +1,4 @@
+#include "core/question.h"
 #include "core/teacher.h"
 #include "core/student.h"
 #include "core/admin.h"
@@ -9,6 +10,7 @@ class Noodle{
     void menuHandler();
     void adminPanel();
     void studentPanel();
+    void teacherPanel();
   private:
     TeacherManagement teacher;
     StudentManagement student;
@@ -22,7 +24,20 @@ void Noodle::menuHandler(){
   switch(choice){
     case '1':
       if(student.login()){
-        cout << "Login Sucessful!" << endl;
+        studentPanel();
+        menuHandler();
+      }else{
+        getch();
+        menuHandler();
+      }
+      break;
+    case '2':
+      if(teacher.login()){
+        teacherPanel();
+        menuHandler();
+      }else{
+        getch();
+        menuHandler();
       }
       break;
     case '3':
@@ -61,5 +76,8 @@ void Noodle::adminPanel(){
 }
 
 void Noodle::studentPanel(){
-  
+  student.menuHandler();
+}
+void Noodle::teacherPanel(){
+  teacher.menuHandler();
 }

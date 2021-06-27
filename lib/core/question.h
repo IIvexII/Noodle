@@ -1,5 +1,5 @@
 #include "header.h"
-
+// #include "student.h"
 #pragma once
 
 #define FILENAME "quesBank/questions.bin"
@@ -27,13 +27,16 @@ class QuestionHandler{
     bool askQuestion(char*, int);
     void updateQuestion();
     void displayError();
-
+    int quiz();
+    void addQuestion();
 };
 void QuestionHandler::input(){
   cin.clear();
   cin.ignore(124, '\n');
   
-  cout << "Subject: "; cin.getline(question.subject, 10);
+  char tmpSubject[3] = "GK";
+
+  strcpy(question.subject, tmpSubject);
   cout << "Question Number: "; cin >> question.questionNo;
 
   // To avoid weird behavior of cin
@@ -126,7 +129,7 @@ Question QuestionHandler::searchQuestion(char* subjectName, int questionNumber){
 
 bool QuestionHandler::askQuestion(char* subject, int questionNo){
   Question ques = searchQuestion(subject, questionNo);
-  char character;
+  char character='\0';
   cout << "Q" << questionNo << ": " << ques.question << endl;
   
   for(int i=0; i<4; i++)
@@ -138,21 +141,21 @@ bool QuestionHandler::askQuestion(char* subject, int questionNo){
       ){
         character = getch();
       }
-    if(ques.answer == character){
-      cout << "Good answer." << endl;
+    if(ques.answer == character || ques.answer == (character+32) ){
+      cout << "Correct" << endl;
+      return 1;
     }
     else{
-      cout << character << " is wrong option." << endl;
+      cout << "Wrong!!! " << ques.answer << " is the right option." << endl;
+      return 0;
     }
-    return 1;
 }
 
 void QuestionHandler::updateQuestion(){
   Question ques, tmp;
-  char subjectName[10]; 
+  char subjectName[10] = "GK"; 
   int questionNo, count=1, choice, pos;
   
-  cout << "Enter Subject: "; cin.getline(subjectName, 10);
   cout << "Enter Question Number: "; cin >> questionNo;
 
 
@@ -209,12 +212,24 @@ void QuestionHandler::updateQuestion(){
   }
   
   file.seekp(pos-sizeof(tmp));
-  file.write((char*)&tmp, sizeof(Student));
+  file.write((char*)&tmp, sizeof(Question));
 
   file.close();
 }
 void QuestionHandler::displayError(){ 
   cout << "Unable to open file..." << endl; 
+}
+int QuestionHandler::quiz(){
+  char tmpSubject[3] = "GK";
+  int points = 0;
+  for(int i=1; i<=10; i++ )
+    points += askQuestion(tmpSubject, i);
+    cout << points << endl;
+  return points;
+}
+void QuestionHandler::addQuestion(){
+  input();
+  writeFile();
 }
 
 

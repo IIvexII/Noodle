@@ -183,6 +183,10 @@ bool StudentManagement::login(){
 }
 void StudentManagement::mainMenu(){
   banner();
+  cout << "Name: " << tmpStudent.name << endl;
+  cout << "Roll Number: " << tmpStudent.rollNo << endl;
+  cout << "Marks: " << tmpStudent.marks << endl;
+  cout << "***********************************" << endl;
   cout << "1. Solve Quiz" << endl;
   cout << "2. Change Password" << endl;
   cout << "3. Display Your Information" << endl;

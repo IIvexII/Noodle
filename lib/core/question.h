@@ -7,10 +7,12 @@
 class Question{
   public:
     char subject[10];
-    int questionNo=-1;
+    int questionNo;
     char question[200];
     char options[4][100];
     char answer;
+
+    Question(): questionNo(-1) { }
 };
 class QuestionHandler{
   private:

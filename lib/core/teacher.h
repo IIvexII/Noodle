@@ -47,11 +47,14 @@ class TeacherManagement{
 void TeacherManagement::banner(){
   system("cls");
   cout << "*****************************" << endl;
-  cout << "*      Teacher Portal       *" << endl;
+  cout << "       Teacher Portal        " << endl;
   cout << "*****************************" << endl;
 }
 void TeacherManagement::mainMenu(){
   banner();
+  cout << " Name: " << tmpTeacher.name <<endl;
+  cout << " ID: " << tmpTeacher.empID <<endl;
+  cout << "*****************************" << endl;
   cout << "1. Add Question" << endl;
   cout << "2. Update Question" << endl;
   cout << "3. Change Password" << endl;
@@ -101,7 +104,19 @@ void TeacherManagement::menuHandler(){
     newRegistration()
 ************************/
 void TeacherManagement::newRegistration(){
-  input();
+  // For the weird behaviour of getline()
+  cin.clear();
+  cin.ignore(124,'\n');
+  
+  cout << "Name: "; cin.getline(teacher.name, 50);
+  cout << "Employee ID: "; cin >> teacher.empID;
+
+  // For the weird behaviour of getline()
+  cin.clear();
+  cin.ignore(124,'\n');
+
+  cout << "Password: "; passwdInput(teacher.password);
+
   writeFile();
 }
 /***********************
@@ -191,7 +206,7 @@ bool TeacherManagement::login(){
 
   banner();
 
-  cout << "Enter Roll Number: "; cin >> id;
+  cout << "Enter Employee ID: "; cin >> id;
   cout << "Password: "; passwdInput(password);
 
   ifstream inFile(FILENAME);
@@ -212,34 +227,23 @@ bool TeacherManagement::login(){
   return 0;
 }
 void TeacherManagement::input(){
-  // For the weird behaviour of getline()
-  cin.clear();
-  cin.ignore(124,'\n');
-  
-  cout << "Name: "; cin.getline(teacher.name, 50);
-  cout << "Roll Number: "; cin >> teacher.empID;
-
-  // For the weird behaviour of getline()
-  cin.clear();
-  cin.ignore(124,'\n');
-
-  cout << "Password: "; passwdInput(teacher.password);
+  //
 }
 void TeacherManagement::writeFile(){
   ofstream outFile(FILENAME, ios::app);
 
   if(outFile.is_open()){
-    outFile.write((char*)&teacher, sizeof(teacher));
+    outFile.write((char*)&teacher, sizeof(Teacher));
     outFile.close();
   }
 }
 void TeacherManagement::readFile(){
-  Teacher st;
+  Teacher tch;
   ifstream inFile(FILENAME, ios::in);
 
   if(inFile.is_open()){
-    while(inFile.read((char*)&st, sizeof(Teacher))){
-      output(st);
+    while(inFile.read((char*)&tch, sizeof(Teacher))){
+      output(tch);
     }
   }
   inFile.close();
